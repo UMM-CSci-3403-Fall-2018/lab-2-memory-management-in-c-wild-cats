@@ -1,5 +1,5 @@
 #include <stdlib.h>
-
+#include <string.h>
 #include "disemvowel.h"
 
 bool isVowel(char letter) {
@@ -31,9 +31,8 @@ bool isVowel(char letter) {
 
 int numNonVowels(char *word) {
 	//https://www.quora.com/How-do-I-find-the-length-of-an-array-in-C
-	int length = sizeof(word)/sizeof(char);
-	//start at 1 because of null terminator
-	int result = 1;
+	int length = strlen(word);
+	int result = 0;
 	int i;
 	for (i=0; i < length; i++) {
 		if(!isVowel(word[i])){
@@ -44,7 +43,7 @@ int numNonVowels(char *word) {
 }
 
 void  removeVowels(char *str, char *result) {
-	int length = sizeof(str)/sizeof(char);
+	int length = strlen(str);
 	int i;
 	int j = 0;
 	for (i = 0; i < length; i++) {
@@ -53,7 +52,7 @@ void  removeVowels(char *str, char *result) {
 			j++;
 		}
 	}
-       result[j +1] = '\0';
+       result[j] = '\0';
 }
 
 char *disemvowel(char *str) {
@@ -61,7 +60,7 @@ char *disemvowel(char *str) {
   // find size of resulting array
   int size = numNonVowels(str);
 
-  char *result = (char*) calloc(size, sizeof(char));
+  char *result = (char*) calloc(size+1, sizeof(char));
 
   removeVowels(str, result);
 
